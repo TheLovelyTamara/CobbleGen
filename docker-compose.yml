@@ -6,14 +6,21 @@ services:
         volumes:
             - "./bin:/src"
         command: cobc -x ./program.cbl ; ./program
-    compile:
+    run:
         build: .
         volumes:
             - "./bin:/src"
         command: ./program
-    DB:
-        image: postgres:latest
+        depends_on: 
+            - db
+    db:
+        image: postgres
+        env_file:
+            - database.env
         environment: 
-            POSTGRES_PASSWORD: example
-        logging:
-            driver: none
+            - PGPASSWORD:password
+        volumes: 
+            - "./data:/ingest"
+            - "./src/postgres:/sql"
+        #logging:
+            #driver: none
