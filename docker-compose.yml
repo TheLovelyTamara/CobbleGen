@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+    compile:
+        build: .
+        volumes:
+            - "./bin:/src"
+        command: cobc -x ./program.cbl ; ./program
+    compile:
+        build: .
+        volumes:
+            - "./bin:/src"
+        command: ./program
+    DB:
+        image: postgres:latest
+        environment: 
+            POSTGRES_PASSWORD: example
+        logging:
+            driver: none
