@@ -21,5 +21,7 @@ RUN unzip ./v1.2.zip &&\
 
 # bugfix
 RUN echo "+ %{!shared:%{!r:%{!fPIE:%{!pie:-fno-PIE -no-pie}}}}" > /usr/share/dpkg/no-pie-link.specs
-RUN cat /usr/share/dpkg/no-pie-link.specs
+
+# cleanup
+RUN rm -f /gnucobol_3.1.2-1_amd64.deb /cblgdb_4.27.1-1_amd64.deb /v1.2.zip
 WORKDIR /src
